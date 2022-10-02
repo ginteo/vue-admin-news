@@ -12,5 +12,6 @@ declare module '@vue/runtime-core' {
     FormRender: typeof import('./../src/components/form-render/src/form-render.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    TableRender: typeof import('./../src/components/table-render/src/table-render.vue')['default']
   }
 }
