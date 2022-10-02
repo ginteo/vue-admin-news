@@ -16,6 +16,7 @@
     "commit": "cz"
   },
   "dependencies": {
+    "@element-plus/icons-vue": "^2.0.9",
     "@vee-validate/i18n": "^4.6.10",
     "@vee-validate/rules": "^4.6.10",
     "axios": "^0.27.2",

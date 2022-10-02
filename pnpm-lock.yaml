@@ -3,6 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@commitlint/cli': ^17.1.2
   '@commitlint/config-conventional': ^17.1.0
+  '@element-plus/icons-vue': ^2.0.9
   '@rushstack/eslint-patch': ^1.1.4
   '@types/node': ^16.11.56
   '@vee-validate/i18n': ^4.6.10
@@ -37,6 +38,7 @@ specifiers:
   yup: ^0.32.11
 
 dependencies:
+  '@element-plus/icons-vue': 2.0.9_vue@3.2.40
   '@vee-validate/i18n': 4.6.10
   '@vee-validate/rules': 4.6.10
   axios: 0.27.2

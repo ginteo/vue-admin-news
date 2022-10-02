@@ -1,7 +1,8 @@
 import type { App } from 'vue'
+import { setupElementPlusIcon } from './icon'
 import { setupTailwindcss } from './tailwindcss'
 
 export function setupPlugins(app: App) {
-  console.log(app)
   setupTailwindcss()
+  setupElementPlusIcon(app)
 }
