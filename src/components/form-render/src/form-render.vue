@@ -92,14 +92,14 @@ const emits = defineEmits(['submit'])
 
 const { handleSubmit, values, errors } = useForm({
   // 表单验证规则
-  validationSchema: props.otherFormProps.validationSchema
+  validationSchema: props.otherFormProps?.validationSchema
 })
 useFileds(props.formData.map(item => item.field))
 
 // 根据表单验证规则判断当前字段是否添加required类名
 const isRequiredClassName = (field: string) => {
-  const validateFields = props.otherFormProps.validationSchema
-    ?._nodes as string[]
+  const validateFields =
+    (props.otherFormProps?.validationSchema?._nodes as string[]) || []
 
   return validateFields.includes(field)
 }
