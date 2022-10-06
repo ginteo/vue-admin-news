@@ -81,6 +81,7 @@ const props = defineProps({
     type: Array as PropType<FormRenderItemType[]>,
     default: () => []
   },
+  initialValues: { type: Object, default: () => {} },
   rowProps: { type: Object as PropType<Partial<RowProps>>, default: () => {} },
   colProps: { type: Object as PropType<Partial<ColProps>>, default: () => {} },
   otherFormProps: {
@@ -91,17 +92,20 @@ const props = defineProps({
 const emits = defineEmits(['submit'])
 
 const { handleSubmit, values, errors } = useForm({
+  initialValues: props.initialValues,
   // 表单验证规则
   validationSchema: props.otherFormProps?.validationSchema
 })
 useFileds(props.formData.map(item => item.field))
 
-// 根据表单验证规则判断当前字段是否添加required类名
+// 根据表单验证规则中是否有required属性（如yup.required()或@vee-validation/rules中的required），判断当前字段是否添加required类名
 const isRequiredClassName = (field: string) => {
-  const validateFields =
-    (props.otherFormProps?.validationSchema?._nodes as string[]) || []
+  const validationSchema = props.otherFormProps?.validationSchema || {}
+  const veeValidationField = validationSchema[field] || {}
+  const yupValidationFields = validationSchema.fields || {}
+  const exclusiveTests = yupValidationFields[field]?.exclusiveTests || {}
 
-  return validateFields.includes(field)
+  return veeValidationField.required || exclusiveTests.required
 }
 
 // 表单提交
