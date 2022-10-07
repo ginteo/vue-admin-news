@@ -1,6 +1,6 @@
 <template>
   <!-- 表格头部 -->
-  <div class="table-header my-4">
+  <div class="table-header mb-4">
     <slot name="header">
       <el-button type="primary" icon="Plus" @click="$emit('add')">
         添加
@@ -17,7 +17,8 @@
       v-if="showIndex"
       label="序号"
       type="index"
-      width="60"
+      :minWidth="indexMinWidth"
+      align="center"
       fixed
     />
 
@@ -35,12 +36,11 @@
       label="操作"
       prop="operate"
       align="center"
-      width="100"
+      :minWidth="operateMinWidth"
       fix="right"
     >
       <template #default="scope">
         <slot name="operate">
-          <!-- <el-button type="primary" :icon="Edit" circle >< -->
           <el-button
             type="primary"
             icon="Edit"
@@ -88,7 +88,9 @@ defineProps({
   showPagination: { type: Boolean, default: true },
   currentPage: { type: Number, default: 1 },
   pageSize: { type: Number, default: 10 },
-  total: { type: Number, default: 0 }
+  total: { type: Number, default: 0 },
+  indexMinWidth: { type: String, default: '80' },
+  operateMinWidth: { type: String, default: '180' }
 })
 defineEmits(['edit', 'delete', 'add', 'changeCurrentPage', 'changePageSize'])
 </script>
