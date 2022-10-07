@@ -4,10 +4,14 @@ import type DialogRender from '@/components/dialog-render'
 import { usePageListStore, type PageListStateType } from '@/store'
 import { deleteList } from '@/api'
 
+type CallbackFn = (param?: any) => void
+
 export const useTableContent = (
   pageName: string,
   queryInfo: any,
-  searchWords: any
+  searchWords: any,
+  addDialogFn?: CallbackFn,
+  editDialogFn?: CallbackFn
 ) => {
   const initialValues = ref<any>({})
   const addDialogRef = ref<InstanceType<typeof DialogRender>>()
@@ -29,6 +33,7 @@ export const useTableContent = (
     if (addDialogRef.value) {
       addDialogRef.value.isShow = true
     }
+    addDialogFn && addDialogFn()
   }
 
   const showEditDialog = (row: any) => {
@@ -36,6 +41,8 @@ export const useTableContent = (
       editDialogRef.value.isShow = true
     }
     initialValues.value = row
+
+    editDialogFn && editDialogFn(row)
   }
 
   const onDelete = async (row: any) => {

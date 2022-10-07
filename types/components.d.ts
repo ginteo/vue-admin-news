@@ -8,7 +8,6 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     DialogRender: typeof import('./../src/components/dialog-render/src/dialog-render.vue')['default']
-    DrawerRender: typeof import('./../src/components/drawer-render/src/drawer-render.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCard: typeof import('element-plus/es')['ElCard']
@@ -29,13 +28,10 @@ declare module '@vue/runtime-core' {
     ElRow: typeof import('element-plus/es')['ElRow']
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
     ElSelect: typeof import('element-plus/es')['ElSelect']
-    ElSwitch: typeof import('element-plus/es')['ElSwitch']
     ElTable: typeof import('element-plus/es')['ElTable']
     ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
     ElTag: typeof import('element-plus/es')['ElTag']
     FormRender: typeof import('./../src/components/form-render/src/form-render.vue')['default']
-    PageDialog: typeof import('./../src/components/page-render/page-dialog/page-dialog.vue')['default']
-    PageSearch: typeof import('./../src/components/page-render/page-search/page-search.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     TableRender: typeof import('./../src/components/table-render/src/table-render.vue')['default']

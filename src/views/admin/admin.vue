@@ -29,6 +29,9 @@
       @change-current-page="handleCurrentChange"
       @change-page-size="handleSizeChange"
     >
+      <template #role="scope">
+        {{ scope.row.role?.name }}
+      </template>
       <template #status="scope">
         <el-tag type="success" v-if="scope.row.status === 1">启用</el-tag>
         <el-tag type="danger" v-else>禁用</el-tag>
@@ -69,6 +72,7 @@ import {
   editDialogConfig
 } from './config'
 import { useSearchForm, useTableContent, useDialogContent } from '@/hooks'
+import { usePageListStore } from '@/store'
 
 const pageName = 'admin'
 
@@ -87,13 +91,38 @@ const {
   onDelete,
   handleSizeChange,
   handleCurrentChange
-} = useTableContent(pageName, queryInfo, searchWords)
+} = useTableContent(pageName, queryInfo, searchWords, undefined, editDialogFn)
 
 const { handleRequestSucessCloseDialog } = useDialogContent(
   pageName,
   queryInfo,
   searchWords
 )
+
+// pinia
+const pageListStore = usePageListStore()
+// 获取所有角色列表
+pageListStore.getPageListAction('role', {
+  offset: 1,
+  limit: 100
+})
+
+function editDialogFn(row: any) {
+  initialValues.value = { ...row, role: row.role?.name }
+
+  // 找到editDialogConfig中的分配角色项，将角色列表数据给其赋值
+  const assignRoleItem = editDialogConfig.formConfig.formData.find(
+    item => item.field === 'roleId'
+  )
+  if (assignRoleItem?.selectProps) {
+    assignRoleItem.selectProps.options = pageListStore.roleList.map(item => {
+      return {
+        label: item.name,
+        value: item.id
+      }
+    })
+  }
+}
 </script>
 
 <style lang="scss" scoped>

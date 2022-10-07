@@ -46,6 +46,12 @@ export const editDialogConfig = {
         field: 'account',
         inputProps: { disabled: true }
       },
+      {
+        type: 'input',
+        label: '当前角色',
+        field: 'role',
+        inputProps: { disabled: true }
+      },
       { type: 'input', label: '昵称', field: 'nickname' },
       { type: 'input', label: '手机号', field: 'tel' },
       {
@@ -57,6 +63,14 @@ export const editDialogConfig = {
             { label: '启用', value: 1 },
             { label: '禁用', value: 0 }
           ]
+        }
+      },
+      {
+        type: 'select',
+        label: '分配角色',
+        field: 'roleId',
+        selectProps: {
+          options: []
         }
       }
     ],
