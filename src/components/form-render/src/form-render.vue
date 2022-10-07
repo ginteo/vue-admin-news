@@ -1,5 +1,10 @@
 <template>
-  <el-form :model="values" v-bind="otherFormProps" @submit="onSubmit">
+  <el-form
+    ref="formRef"
+    :model="values"
+    v-bind="otherFormProps"
+    @submit="onSubmit"
+  >
     <el-row v-bind="rowProps">
       <el-col v-bind="colProps" v-for="item in formData" :key="item.field">
         <el-form-item
@@ -63,17 +68,19 @@
 
     <!-- 提交按钮 -->
     <el-form-item>
-      <slot name="button" v-if="$slots.button"></slot>
-      <el-button type="primary" native-type="submit" v-else>提交</el-button>
+      <slot name="button">
+        <el-button @click="handleReset()">重置</el-button>
+        <el-button type="primary" native-type="submit">提交</el-button>
+      </slot>
     </el-form-item>
   </el-form>
 </template>
 
 <script lang="ts" setup>
-import { useForm, useFileds } from '@/plugins/validate'
-
 import type { PropType } from 'vue'
 import type { RowProps, ColProps } from 'element-plus'
+import { useForm, useFileds } from '@/plugins/validate'
+
 import type { FormRenderItemType, OtherFormProps } from '../types'
 
 const props = defineProps({
@@ -91,7 +98,7 @@ const props = defineProps({
 })
 const emits = defineEmits(['submit'])
 
-const { handleSubmit, values, errors } = useForm({
+const { handleSubmit, handleReset, values, errors } = useForm({
   initialValues: props.initialValues,
   // 表单验证规则
   validationSchema: props.otherFormProps?.validationSchema
@@ -110,6 +117,8 @@ const isRequiredClassName = (field: string) => {
 
 // 表单提交
 const onSubmit = handleSubmit(values => emits('submit', values))
+
+defineExpose({ handleReset })
 </script>
 
 <style lang="scss" scoped>
