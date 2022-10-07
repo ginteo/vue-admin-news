@@ -12,7 +12,14 @@ const router = createRouter({
     {
       path: '/layout',
       name: 'layout',
-      component: () => import('@/layouts/layout.vue')
+      component: () => import('@/layouts/layout.vue'),
+      children: [
+        {
+          path: '/admin',
+          name: 'admin',
+          component: () => import('@/views/admin/admin.vue')
+        }
+      ]
     }
   ]
 })

@@ -13,6 +13,18 @@ export const useLoginStore = defineStore('login', {
     }
   },
   actions: {
+    setupLocal() {
+      const admin = useLocalStorage.get('admin')
+      const accessToken = useLocalStorage.get('accessToken')
+      const refreshToken = useLocalStorage.get('refreshToken')
+
+      if (admin) {
+        this.admin = admin
+        this.accessToken = accessToken
+        this.refreshToken = refreshToken
+      }
+    },
+
     async loginAction(loginDto: LoginDto) {
       const {
         code,
