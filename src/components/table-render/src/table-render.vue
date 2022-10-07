@@ -40,7 +40,7 @@
       fix="right"
     >
       <template #default="scope">
-        <slot name="operate">
+        <slot name="operate" :row="scope.row">
           <el-button
             type="primary"
             icon="Edit"
