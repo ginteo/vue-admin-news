@@ -10,7 +10,9 @@ export const usePageListStore = defineStore('page-list', {
   state: (): PageListStateType => {
     return {
       adminList: [],
-      adminTotal: 0
+      adminTotal: 0,
+      roleList: [],
+      roleTotal: 0
     }
   },
   actions: {
